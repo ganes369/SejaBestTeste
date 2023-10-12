@@ -1,5 +1,5 @@
-import { FoneEntity, IFoneEntity } from '../../src/1-entities/fone'
-import { IPessoaEntity, PessoaEntity } from '../../src/1-entities/pessoa'
+import { FoneEntity, IFoneEntity } from '../../src/1-domain/fone'
+import { IPessoaEntity, PessoaEntity } from '../../src/1-domain/pessoa'
 
 describe('Test Suite for Entity Pessoa', () => {
 
@@ -11,25 +11,22 @@ describe('Test Suite for Entity Pessoa', () => {
             celular: true,
             codigo: '88'
         })
-        entity = PessoaEntity.create({
-            nome: 'test',
-            sobrenome: 'unitario',
-            fone: fone
-        })
-        // jest.spyOn(console, console.log.name).mockImplementation(() => {})
+        entity = new PessoaEntity(
+            'test',
+            'unitario',
+            fone
+        )
     })
 
     test('should create a person entity ', () => {
-        const expected = { ...entity };
-        Reflect.deleteProperty(expected, 'fone')
+        const { fone, ...expected } = entity;
 
         expect(expected.nome).toBe('test');
         expect(expected.sobrenome).toBe('unitario');
-        expect(expected.fone).toBeFalsy();
+        expect(expected).not.toHaveProperty('fone');
     })
 
     test('should create a PessoaEntity instance with fone', () => {
-        // Dados de teste inválidos (sem propriedades)
         const expected = entity
 
         expect(expected).toBeInstanceOf(PessoaEntity);
@@ -39,5 +36,24 @@ describe('Test Suite for Entity Pessoa', () => {
         expect(expected.fone?.codigo).toBe('88');
         expect(expected.fone?.numero).toBe('999151386');
     });
+
+    test('should update properties', () => {
+        const newEntity = new PessoaEntity(entity.nome, entity.sobrenome)
+        newEntity.setPessoa({
+            nome: 'teste',
+            sobrenome: 'update'
+        });
+
+        expect(newEntity.nome).toEqual('teste');
+        expect(newEntity.sobrenome).toEqual('update');
+    });
+
+    test('should get properties', () => {
     
+        expect(entity).toBeInstanceOf(PessoaEntity);
+        expect(entity.nome).toBeDefined();
+        expect(entity.sobrenome).toBeDefined();
+        expect(entity.fone).toBeDefined();
+    });
+
 })
