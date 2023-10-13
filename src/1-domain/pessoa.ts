@@ -14,7 +14,7 @@ export class PessoaEntity {
   constructor(props: IPessoaEntity) {
     this.nome = props.nome
     this.sobrenome = props.sobrenome
-    this.fone = props.fone ? FoneEntity.create(props?.fone) : undefined
+    this.fone = props.fone ? new FoneEntity(props?.fone) : undefined
   }
 
   public setPessoa(props: IPessoaEntity): this {

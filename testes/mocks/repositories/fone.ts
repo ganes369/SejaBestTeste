@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IFoneEntity } from "../../../src/1-domain/fone"
 import { IFoneRepository } from "../../../src/2-business/repositories/foneRepository"
 

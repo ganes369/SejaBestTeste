@@ -19,6 +19,6 @@ export class FoneRepository implements IFoneRepository {
     props: Partial<IFoneEntity> & { pessoa: number },
   ): Promise<IFoneEntity> {
     const result = await FoneModel.create(props)
-    return FoneEntity.create(result.get({ plain: true }))
+    return new FoneEntity(result.get({ plain: true }))
   }
 }

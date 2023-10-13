@@ -15,10 +15,6 @@ export class FoneEntity {
     this.celular = props.celular
   }
 
-  static create(props: IFoneEntity): FoneEntity {
-    return new FoneEntity(props)
-  }
-
   setFone(props: IFoneEntity): IFoneEntity {
     if (props.codigo) {
       this.codigo = props.codigo

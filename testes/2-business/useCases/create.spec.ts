@@ -6,7 +6,7 @@ import { mockRepositoryFone } from "../../mocks/repositories/fone"
 
 const repositoriesPessoa = new mockRepositoryPessoa()
 const respositoryFone = new mockRepositoryFone()
-let useCase = new UseCasesPessoa(repositoriesPessoa, respositoryFone)
+const useCase = new UseCasesPessoa(repositoriesPessoa, respositoryFone)
 
 describe("Test Suite for use case create pessoa", () => {
   beforeAll(() => {
