@@ -29,6 +29,7 @@ e me prover maior testabilidade para a aplicação
 
 1. "test:cov": "jest --no-cache --maxWorkers=60% --coverage",
 2. "test:dev": "jest --watch --runInBand --verbose",
+3. "test": "jest",
 
 ## 👩‍💻 Responsavel
 
