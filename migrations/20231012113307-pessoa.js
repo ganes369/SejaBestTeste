@@ -1,13 +1,13 @@
-'use strict'
+"use strict"
 
-const { DataTypes } = require('sequelize')
+const { DataTypes } = require("sequelize")
 
 module.exports = {
   up: async (
     /**  @type {import('sequelize').QueryInterface} */ queryInterface,
-    _Sequelize
+    _Sequelize,
   ) => {
-    await queryInterface.createTable('pessoa', {
+    await queryInterface.createTable("pessoa", {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -22,7 +22,7 @@ module.exports = {
         type: DataTypes.STRING(72),
         allowNull: false,
       },
-  
+
       created_at: {
         type: DataTypes.DATE,
       },
@@ -33,6 +33,6 @@ module.exports = {
   },
 
   down: async (/** @type {QueryInterface} */ queryInterface, _Sequelize) => {
-    await queryInterface.dropTable('pessoa')
+    await queryInterface.dropTable("pessoa")
   },
 }

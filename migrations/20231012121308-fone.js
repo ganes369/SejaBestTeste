@@ -1,13 +1,13 @@
-'use strict'
+"use strict"
 
-const { DataTypes } = require('sequelize')
+const { DataTypes } = require("sequelize")
 
 module.exports = {
   up: async (
     /**  @type {import('sequelize').QueryInterface} */ queryInterface,
-    _Sequelize
+    _Sequelize,
   ) => {
-    await queryInterface.createTable('fone', {
+    await queryInterface.createTable("fone", {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -21,7 +21,6 @@ module.exports = {
       numero: {
         type: DataTypes.STRING(72),
         allowNull: false,
-        unique: true
       },
       codigo: {
         type: DataTypes.STRING(72),
@@ -30,15 +29,15 @@ module.exports = {
       pessoa: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'pessoa',
-          key: 'id',
+          model: "pessoa",
+          key: "id",
         },
         unique: true,
-        onDelete: 'cascade',
-        onUpdate: 'cascade',
+        onDelete: "cascade",
+        onUpdate: "cascade",
         allowNull: true,
       },
-      
+
       created_at: {
         type: DataTypes.DATE,
       },
@@ -49,6 +48,6 @@ module.exports = {
   },
 
   down: async (/** @type {QueryInterface} */ queryInterface, _Sequelize) => {
-    await queryInterface.dropTable('fone')
+    await queryInterface.dropTable("fone")
   },
 }
