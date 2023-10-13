@@ -5,7 +5,7 @@ describe("Test Suite for Entity Pessoa", () => {
   let entity: IPessoaEntity
   let fone: IFoneEntity
   beforeAll(() => {
-    fone = FoneEntity.create({
+    fone = new FoneEntity({
       numero: "999151386",
       celular: true,
       codigo: "88",

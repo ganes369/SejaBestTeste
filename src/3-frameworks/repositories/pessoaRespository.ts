@@ -23,10 +23,10 @@ export class PessoaRepository implements IPessoaRepository {
       ],
       limit: 1,
     })
-    return result ? PessoaEntity.create(result.get({ plain: true })) : undefined
+    return result ? new PessoaEntity(result.get({ plain: true })) : undefined
   }
 
-  async findName(prop: string): Promise<any[]> {
+  async findName(prop: string): Promise<IPessoaEntity[]> {
     const result = await PessoaModel.findAll({
       where: { nome: prop },
       include: [
@@ -36,7 +36,7 @@ export class PessoaRepository implements IPessoaRepository {
       ],
     })
 
-    return result.map((elem) => PessoaEntity.create(elem.get({ plain: true })))
+    return result.map((elem) => new PessoaEntity(elem.get({ plain: true })))
   }
 
   async findAll(): Promise<IPessoaEntity[]> {
@@ -47,18 +47,18 @@ export class PessoaRepository implements IPessoaRepository {
         },
       ],
     })
-    return result.map((elem) => PessoaEntity.create(elem.get({ plain: true })))
+    return result.map((elem) => new PessoaEntity(elem.get({ plain: true })))
   }
 
   async update(
     props: Omit<IPessoaEntity, "fone"> & { id: number },
-  ): Promise<any> {
+  ): Promise<[]> {
     const { id, ...newProps } = props
-    const [, updatedRecords] = await PessoaModel.update(newProps, {
+    await PessoaModel.update(newProps, {
       where: { id },
       returning: true,
       limit: 1,
     })
-    return updatedRecords
+    return []
   }
 }

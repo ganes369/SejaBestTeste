@@ -1,5 +1,5 @@
 import { IPessoaEntity } from "../../1-domain/pessoa"
-import { UseCasesPessoa } from "../../2-business/useCases/pessoa/pessoaUseCase"
+import { UseCasesPessoa } from "../../2-business/services/pessoa/pessoaUseCase"
 import { FoneRepository } from "../../3-frameworks/repositories/foneRepository"
 import { PessoaRepository } from "../../3-frameworks/repositories/pessoaRespository"
 

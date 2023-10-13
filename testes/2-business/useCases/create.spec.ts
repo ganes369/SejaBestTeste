@@ -1,4 +1,4 @@
-import { UseCasesPessoa } from "../../../src/2-business/useCases/pessoa/pessoaUseCase"
+import { UseCasesPessoa } from "../../../src/2-business/services/pessoa/pessoaUseCase"
 import { mockRepositoryPessoa } from "../../mocks/repositories/pessoa"
 import { PessoaEntity } from "../../../src/1-domain/pessoa"
 import { CustomError } from "../../../src/2-business/erros/customError"
@@ -18,7 +18,7 @@ describe("Test Suite for use case create pessoa", () => {
       .spyOn(repositoriesPessoa, "create")
       .mockReturnValue(
         Promise.resolve(
-          PessoaEntity.create({ nome: "test", sobrenome: "unitario" }),
+          new PessoaEntity({ nome: "test", sobrenome: "unitario" }),
         ),
       )
 
@@ -63,7 +63,7 @@ describe("Test Suite for use case findOne pessoa", () => {
       .spyOn(repositoriesPessoa, "findOne")
       .mockReturnValue(
         Promise.resolve(
-          PessoaEntity.create({ nome: "test", sobrenome: "unitario" }),
+          new PessoaEntity({ nome: "test", sobrenome: "unitario" }),
         ),
       )
 
@@ -101,7 +101,7 @@ describe("Test Suite for use case findName pessoa", () => {
       .spyOn(repositoriesPessoa, "findName")
       .mockReturnValue(
         Promise.resolve([
-          PessoaEntity.create({ nome: "test", sobrenome: "unitario" }),
+          new PessoaEntity({ nome: "test", sobrenome: "unitario" }),
         ]),
       )
 
@@ -139,7 +139,7 @@ describe("Test Suite for use case findAll pessoa", () => {
       .spyOn(repositoriesPessoa, "findAll")
       .mockReturnValue(
         Promise.resolve([
-          PessoaEntity.create({ nome: "test", sobrenome: "unitario" }),
+          new PessoaEntity({ nome: "test", sobrenome: "unitario" }),
         ]),
       )
 
@@ -177,7 +177,7 @@ describe("Test Suite for use case update pessoa", () => {
       .spyOn(repositoriesPessoa, "findAll")
       .mockReturnValue(
         Promise.resolve([
-          PessoaEntity.create({ nome: "test", sobrenome: "unitario" }),
+          new PessoaEntity({ nome: "test", sobrenome: "unitario" }),
         ]),
       )
 
@@ -211,28 +211,18 @@ describe("Test Suite for use case create pessoa", () => {
   })
 
   test("should update a person contact and if existe fone update fone", async () => {
-    jest
-      .spyOn(repositoriesPessoa, "findOne")
-      .mockReturnValue(
-        Promise.resolve(
-          PessoaEntity.create({
-            nome: "test",
-            sobrenome: "unitario",
-            fone: { celular: true, codigo: "88", numero: "999151386" },
-          }),
-        ),
-      )
+    jest.spyOn(repositoriesPessoa, "findOne").mockReturnValue(
+      Promise.resolve(
+        new PessoaEntity({
+          nome: "test",
+          sobrenome: "unitario",
+          fone: { celular: true, codigo: "88", numero: "999151386" },
+        }),
+      ),
+    )
     const spyUpdatePessoa = jest
       .spyOn(repositoriesPessoa, "update")
-      .mockReturnValue(
-        Promise.resolve(
-          PessoaEntity.create({
-            nome: "test",
-            sobrenome: "unitario",
-            fone: { celular: true, codigo: "88", numero: "999151386" },
-          }),
-        ),
-      )
+      .mockReturnValue(Promise.resolve([]))
 
     const spyUpdateFone = jest
       .spyOn(respositoryFone, "update")

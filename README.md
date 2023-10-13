@@ -2,6 +2,8 @@
 
 # O projeto consiste em criar uma api que imite a agenda de contatos do celular
 
+Desenvolvimento em camadas, separação de responsabilidades e maior testabilidade, a camada de domain representa as classes de dominio solicitadas conforme diagrama.
+
 # 4 End-points estão disponíveis
 
 1. Criar o contato

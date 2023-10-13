@@ -5,7 +5,5 @@ export interface IPessoaRepository {
   findOne(prop: number): Promise<IPessoaEntity | undefined>
   findName(prop: string): Promise<IPessoaEntity[]>
   findAll(): Promise<IPessoaEntity[]>
-  update(
-    props: Omit<IPessoaEntity, "fone"> & { id: number },
-  ): Promise<IPessoaEntity>
+  update(props: Omit<IPessoaEntity, "fone"> & { id: number }): Promise<[]>
 }

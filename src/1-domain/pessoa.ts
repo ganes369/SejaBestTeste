@@ -17,11 +17,6 @@ export class PessoaEntity {
     this.fone = props.fone ? FoneEntity.create(props?.fone) : undefined
   }
 
-  static create(props: IPessoaEntity): PessoaEntity {
-    const fone = props.fone ? FoneEntity.create(props?.fone) : undefined
-    return new PessoaEntity({ ...props, fone })
-  }
-
   public setPessoa(props: IPessoaEntity): this {
     if (props.nome) {
       this.nome = props.nome

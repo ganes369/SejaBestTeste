@@ -15,9 +15,7 @@ export class mockRepositoryPessoa implements IPessoaRepository {
     throw new Error("Method not implemented.")
   }
 
-  update(
-    _props: Partial<IPessoaEntity> & { id: number },
-  ): Promise<IPessoaEntity> {
+  update(_props: Partial<IPessoaEntity> & { id: number }): Promise<[]> {
     throw new Error("Method not implemented.")
   }
 }
