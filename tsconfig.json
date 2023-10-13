@@ -1,6 +1,7 @@
 {
- // "extends": "./tsconfig.paths.json",
+  // "extends": "./tsconfig.paths.json",
   "compilerOptions": {
+    "module": "CommonJS",
     "lib": ["ES2019"],
     "moduleResolution": "node",
     "noUnusedLocals": true,
@@ -13,6 +14,7 @@
     "sourceMap": true,
     "target": "ES2019",
     "outDir": "lib",
+    "allowSyntheticDefaultImports": true
   },
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true,
@@ -20,10 +22,7 @@
     "doTypeCheck": true,
     "forkChecker": true
   },
-  "include": [
-    "src/**/*.ts",
-    "test"
-  ],
+  "include": ["src/**/*.ts", "test"],
   "exclude": [
     "node_modules/**/*",
     ".serverless/**/*",
