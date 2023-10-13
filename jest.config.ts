@@ -1,11 +1,16 @@
-module.exports = {
+import type { Config } from "@jest/types"
+
+const config: Config.InitialOptions = {
   preset: "ts-jest",
   testEnvironment: "node",
-  testMatch: ["**/*.spec.ts"], // Padrão para arquivos de teste TypeScript
+  testMatch: ["**/*.spec.ts"],
   transform: {
     "^.+\\.ts$": "ts-jest",
   },
-  collectCoverage: true, // Ativa a coleta de cobertura de código
-  coverageDirectory: "./coverage", // Diretório onde os relatórios de cobertura serão armazenados
-  coverageReporters: ["lcov", "text-summary"], // Formatos de relatório desejados
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  collectCoverage: true,
+  coverageDirectory: "coverage",
+  coverageReporters: ["json", "lcov", "text", "clover"],
 }
+
+export default config

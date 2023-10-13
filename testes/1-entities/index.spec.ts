@@ -18,6 +18,7 @@ describe("Test Suite for Entity Pessoa", () => {
   })
 
   test("should create a person entity ", () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { fone, ...expected } = entity
 
     expect(expected.nome).toBe("test")
