@@ -22,6 +22,6 @@
     "doTypeCheck": true,
     "forkChecker": true
   },
-  "include": ["src/**/*.ts", "testes/"],
+  "include": ["src/**/*.ts", "test/"],
   "exclude": ["node_modules/**/*", ".vscode/**/*"]
 }
