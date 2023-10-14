@@ -1,4 +1,4 @@
-import { UseCasesPessoa } from "../../../src/2-business/services/pessoa/pessoaUseCase"
+import { ServicePessoa } from "../../../src/2-business/services/pessoa/pessoaService"
 import { mockRepositoryPessoa } from "../../mocks/repositories/pessoa"
 import { PessoaEntity } from "../../../src/1-domain/pessoa"
 import { CustomError } from "../../../src/2-business/erros/customError"
@@ -6,9 +6,9 @@ import { mockRepositoryFone } from "../../mocks/repositories/fone"
 
 const repositoriesPessoa = new mockRepositoryPessoa()
 const respositoryFone = new mockRepositoryFone()
-const useCase = new UseCasesPessoa(repositoriesPessoa, respositoryFone)
+const service = new ServicePessoa(repositoriesPessoa, respositoryFone)
 
-describe("Test Suite for use case create pessoa", () => {
+describe("Test Suite for service create pessoa", () => {
   beforeAll(() => {
     jest.clearAllMocks()
   })
@@ -22,7 +22,7 @@ describe("Test Suite for use case create pessoa", () => {
         ),
       )
 
-    const result = await useCase.create({
+    const result = await service.create({
       nome: "test",
       sobrenome: "unitario",
     })
@@ -39,7 +39,7 @@ describe("Test Suite for use case create pessoa", () => {
       .mockRejectedValue(new CustomError("Some error message"))
 
     try {
-      await useCase.create({
+      await service.create({
         nome: "test",
         sobrenome: "unitario",
       })
@@ -53,7 +53,7 @@ describe("Test Suite for use case create pessoa", () => {
   })
 })
 
-describe("Test Suite for use case findOne pessoa", () => {
+describe("Test Suite for service findOne pessoa", () => {
   beforeAll(() => {
     jest.clearAllMocks()
   })
@@ -67,7 +67,7 @@ describe("Test Suite for use case findOne pessoa", () => {
         ),
       )
 
-    const result = await useCase.findOne(1)
+    const result = await service.findOne(1)
 
     expect(result).toBeInstanceOf(PessoaEntity)
     expect(spy).toBeCalled()
@@ -81,7 +81,7 @@ describe("Test Suite for use case findOne pessoa", () => {
       .mockRejectedValue(new CustomError("Some error message"))
 
     try {
-      await useCase.findOne(1)
+      await service.findOne(1)
       // Se o método create não lançar uma exceção, esta linha falhará no teste
       expect(true).toBe(false)
     } catch (error) {
@@ -91,7 +91,7 @@ describe("Test Suite for use case findOne pessoa", () => {
   })
 })
 
-describe("Test Suite for use case findName pessoa", () => {
+describe("Test Suite for service findName pessoa", () => {
   beforeAll(() => {
     jest.clearAllMocks()
   })
@@ -105,7 +105,7 @@ describe("Test Suite for use case findName pessoa", () => {
         ]),
       )
 
-    const result = await useCase.findName("test")
+    const result = await service.findName("test")
 
     expect(Array.isArray(result)).toBeTruthy()
     expect(spy).toBeCalled()
@@ -119,7 +119,7 @@ describe("Test Suite for use case findName pessoa", () => {
       .mockRejectedValue(new CustomError("Some error message"))
 
     try {
-      await useCase.findName("test")
+      await service.findName("test")
       // Se o método create não lançar uma exceção, esta linha falhará no teste
       expect(true).toBe(false)
     } catch (error) {
@@ -129,7 +129,7 @@ describe("Test Suite for use case findName pessoa", () => {
   })
 })
 
-describe("Test Suite for use case findAll pessoa", () => {
+describe("Test Suite for service findAll pessoa", () => {
   beforeAll(() => {
     jest.clearAllMocks()
   })
@@ -143,7 +143,7 @@ describe("Test Suite for use case findAll pessoa", () => {
         ]),
       )
 
-    const result = await useCase.findAll()
+    const result = await service.findAll()
 
     expect(Array.isArray(result)).toBeTruthy()
     expect(spy).toBeCalled()
@@ -157,7 +157,7 @@ describe("Test Suite for use case findAll pessoa", () => {
       .mockRejectedValue(new CustomError("Some error message"))
 
     try {
-      await useCase.findAll()
+      await service.findAll()
       // Se o método create não lançar uma exceção, esta linha falhará no teste
       expect(true).toBe(false)
     } catch (error) {
@@ -167,7 +167,7 @@ describe("Test Suite for use case findAll pessoa", () => {
   })
 })
 
-describe("Test Suite for use case update pessoa", () => {
+describe("Test Suite for service update pessoa", () => {
   beforeAll(() => {
     jest.clearAllMocks()
   })
@@ -181,7 +181,7 @@ describe("Test Suite for use case update pessoa", () => {
         ]),
       )
 
-    const result = await useCase.findAll()
+    const result = await service.findAll()
 
     expect(Array.isArray(result)).toBeTruthy()
     expect(spy).toBeCalled()
@@ -195,7 +195,7 @@ describe("Test Suite for use case update pessoa", () => {
       .mockRejectedValue(new CustomError("Some error message"))
 
     try {
-      await useCase.findAll()
+      await service.findAll()
       // Se o método create não lançar uma exceção, esta linha falhará no teste
       expect(true).toBe(false)
     } catch (error) {
@@ -205,7 +205,7 @@ describe("Test Suite for use case update pessoa", () => {
   })
 })
 
-describe("Test Suite for use case create pessoa", () => {
+describe("Test Suite for service create pessoa", () => {
   beforeAll(() => {
     jest.clearAllMocks()
   })
@@ -228,7 +228,7 @@ describe("Test Suite for use case create pessoa", () => {
       .spyOn(respositoryFone, "update")
       .mockReturnValue(Promise.resolve(null))
 
-    const result = await useCase.update({
+    const result = await service.update({
       nome: "test",
       sobrenome: "unitario",
       id: 1,
@@ -249,7 +249,7 @@ describe("Test Suite for use case create pessoa", () => {
     const spyUpdatePessoa = jest.spyOn(repositoriesPessoa, "update")
     const spyUpdateFone = jest.spyOn(respositoryFone, "update")
 
-    await useCase.update({
+    await service.update({
       nome: "test",
       sobrenome: "unitario",
       id: 1,

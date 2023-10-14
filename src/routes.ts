@@ -22,10 +22,6 @@ router.get("/list/contact", async (_req: Request, res: Response) => {
   try {
     const result = await controllerPessoa.listAll()
 
-    if (result instanceof Error) {
-      return res.status(404).json(result)
-    }
-
     return res.status(200).json(result)
   } catch (error) {
     return res.status(500).json(new CustomError(error.message))
@@ -76,7 +72,5 @@ router.put("/update/contact/", async (req: Request, res: Response) => {
     return res.status(500).json(new CustomError(error.message))
   }
 })
-
-// Adicione mais rotas conforme necessário
 
 export default router

@@ -7,7 +7,6 @@ const port = 3000
 app.use(bodyParser.json())
 app.use("/api", routes)
 
-// Inicie o servidor Express
 app.listen(port, () => {
   console.log(`Servidor Express está ouvindo na porta ${port}`)
 })

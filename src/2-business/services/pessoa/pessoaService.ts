@@ -11,7 +11,7 @@ import {
 import { IFoneRepository } from "../../repositories/foneRepository"
 import { IPessoaRepository } from "../../repositories/pessoaRepository"
 
-export class UseCasesPessoa {
+export class ServicePessoa {
   private repositoryPessoa: IPessoaRepository
   private respositoryFone: IFoneRepository
 
