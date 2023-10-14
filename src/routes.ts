@@ -39,7 +39,7 @@ router.get("/list/contact/:id", async (req: Request, res: Response) => {
     }
     return res.status(200).json(result)
   } catch (error) {
-    return res.status(500).json(error)
+    return res.status(500).json(new CustomError(error.message))
   }
 })
 

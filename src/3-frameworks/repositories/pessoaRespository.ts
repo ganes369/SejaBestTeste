@@ -1,8 +1,18 @@
+import { Includeable } from "sequelize"
 import { IPessoaEntity, PessoaEntity } from "../../1-domain/pessoa"
 import { IPessoaRepository } from "../../2-business/repositories/pessoaRepository"
 import { PessoaModel } from "../models/pessoaModel"
 
 export class PessoaRepository implements IPessoaRepository {
+  private include: Includeable[]
+
+  constructor() {
+    this.include = [
+      {
+        association: "fone",
+      },
+    ]
+  }
   async create(props: IPessoaEntity): Promise<PessoaEntity> {
     const associationInclude =
       props.fone !== undefined ? [{ association: "fone" }] : []
@@ -16,11 +26,7 @@ export class PessoaRepository implements IPessoaRepository {
   async findOne(prop: number): Promise<IPessoaEntity> {
     const result = await PessoaModel.findOne({
       where: { id: prop },
-      include: [
-        {
-          association: "fone",
-        },
-      ],
+      include: this.include,
       limit: 1,
     })
     return result ? new PessoaEntity(result.get({ plain: true })) : undefined
@@ -29,11 +35,7 @@ export class PessoaRepository implements IPessoaRepository {
   async findName(prop: string): Promise<IPessoaEntity[]> {
     const result = await PessoaModel.findAll({
       where: { nome: prop },
-      include: [
-        {
-          association: "fone",
-        },
-      ],
+      include: this.include,
     })
 
     return result.map((elem) => new PessoaEntity(elem.get({ plain: true })))
@@ -41,11 +43,7 @@ export class PessoaRepository implements IPessoaRepository {
 
   async findAll(): Promise<IPessoaEntity[]> {
     const result = await PessoaModel.findAll({
-      include: [
-        {
-          association: "fone",
-        },
-      ],
+      include: this.include,
     })
     return result.map((elem) => new PessoaEntity(elem.get({ plain: true })))
   }
