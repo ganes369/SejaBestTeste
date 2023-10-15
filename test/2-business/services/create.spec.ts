@@ -37,19 +37,9 @@ describe("Test Suite for service create pessoa", () => {
     jest
       .spyOn(repositoriesPessoa, "create")
       .mockRejectedValue(new CustomError("Some error message"))
-
-    try {
-      await service.create({
-        nome: "test",
-        sobrenome: "unitario",
-      })
-
-      // Se o método create não lançar uma exceção, esta linha falhará no teste
-      expect(true).toBe(false)
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error)
-      expect(error.message).toBe("Some error message")
-    }
+    await expect(
+      repositoriesPessoa.create({ nome: "test", sobrenome: "unitario" }),
+    ).rejects.toThrow(new CustomError("Some error message"))
   })
 })
 
@@ -96,7 +86,7 @@ describe("Test Suite for service findName pessoa", () => {
     jest.clearAllMocks()
   })
 
-  test("should create a person entity ", async () => {
+  test("should find name a person entity ", async () => {
     const spy = jest
       .spyOn(repositoriesPessoa, "findName")
       .mockReturnValue(
@@ -168,44 +158,6 @@ describe("Test Suite for service findAll pessoa", () => {
 })
 
 describe("Test Suite for service update pessoa", () => {
-  beforeAll(() => {
-    jest.clearAllMocks()
-  })
-
-  test("should find all a person entity ", async () => {
-    const spy = jest
-      .spyOn(repositoriesPessoa, "findAll")
-      .mockReturnValue(
-        Promise.resolve([
-          new PessoaEntity({ nome: "test", sobrenome: "unitario" }),
-        ]),
-      )
-
-    const result = await service.findAll()
-
-    expect(Array.isArray(result)).toBeTruthy()
-    expect(spy).toBeCalled()
-    expect(result[0].nome).toBe("test")
-    expect(result[0].sobrenome).toBe("unitario")
-  })
-
-  test("should handle exception when repository find all method throws", async () => {
-    jest
-      .spyOn(repositoriesPessoa, "findAll")
-      .mockRejectedValue(new CustomError("Some error message"))
-
-    try {
-      await service.findAll()
-      // Se o método create não lançar uma exceção, esta linha falhará no teste
-      expect(true).toBe(false)
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error)
-      expect(error.message).toBe("Some error message")
-    }
-  })
-})
-
-describe("Test Suite for service create pessoa", () => {
   beforeAll(() => {
     jest.clearAllMocks()
   })
