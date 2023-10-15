@@ -182,7 +182,7 @@ describe("Test Suite for service update pessoa", () => {
 
     const result = await service.update({
       nome: "test",
-      sobrenome: "unitario",
+      sobrenome: "update",
       id: 1,
     })
 
@@ -190,7 +190,7 @@ describe("Test Suite for service update pessoa", () => {
     expect(spyUpdatePessoa).toBeCalled()
     expect(spyUpdateFone).toBeCalled()
     expect(result.nome).toBe("test")
-    expect(result.sobrenome).toBe("unitario")
+    expect(result.sobrenome).toBe("update")
   })
 
   test("should update return null if fone does`t exist", async () => {
@@ -201,7 +201,7 @@ describe("Test Suite for service update pessoa", () => {
     const spyUpdatePessoa = jest.spyOn(repositoriesPessoa, "update")
     const spyUpdateFone = jest.spyOn(respositoryFone, "update")
 
-    await service.update({
+    const result = await service.update({
       nome: "test",
       sobrenome: "unitario",
       id: 1,
@@ -209,5 +209,6 @@ describe("Test Suite for service update pessoa", () => {
 
     expect(spyUpdatePessoa).not.toHaveBeenCalled()
     expect(spyUpdateFone).not.toHaveBeenCalled()
+    expect(result).toBeUndefined()
   })
 })
