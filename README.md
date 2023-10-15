@@ -4,6 +4,10 @@
 
 Desenvolvimento em camadas, separação de responsabilidades e maior testabilidade, a camada de domain representa as classes de dominio solicitadas conforme diagrama.
 
+# Organização
+
+Tentei implementar os conceitos de clean arquiteture, pois promove a organização do código em camadas, com uma clara separação de responsabilidades. O objetivo principal é isolar a lógica de negócios da aplicação das preocupações relacionadas à infraestrutura e à interface do usuário. Isso permite que as partes centrais da aplicação sejam independentes de detalhes técnicos, facilitando a escalabilidade e os testes. A separação das preocupações facilita a implementação de testes unitários e de integração em diferentes partes da aplicação, sem depender de detalhes de implementação.
+
 # 4 End-points estão disponíveis
 
 1. Criar o contato
