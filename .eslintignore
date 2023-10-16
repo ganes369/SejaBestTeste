@@ -1,0 +1,5 @@
+migrations
+node_modules
+covarage
+lib
+jest.config.ts

@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "cda27adb-7b60-412c-949b-0d3fa9ca8f38",
+		"name": "seja_best_project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13067379",
+		"_collection_link": "https://luzita.postman.co/workspace/93fbe349-dfea-4dfb-8be8-f19963eed97e/collection/13067379-cda27adb-7b60-412c-949b-0d3fa9ca8f38?action=share&source=collection_link&creator=13067379"
+	},
+	"item": [
+		{
+			"name": "listar todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/list/contact/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"list",
+						"contact",
+						""
+					]
+				},
+				"description": "Rota para Listar todos os contatos\n\ncodigo de resposta de sucesso 200"
+			},
+			"response": []
+		},
+		{
+			"name": "add pessoa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"seja\",\r\n\t\"sobrenome\":\"best\",\r\n\t\"fone\": {\r\n\t\t\"codigo\": \"88\",\r\n\t\t\"celular\": true,\r\n\t\t\"numero\": \"999143440\"\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/create/contact/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"create",
+						"contact",
+						""
+					]
+				},
+				"description": "Rota para adicionar nova pessoa e contato dela\n\ncodigo de resposta de sucesso 201\n\n| param | type | Description | required | default | paths |\n| --- | --- | --- | --- | --- | --- |\n| nome | string | nome da pessoa | true | false | body |\n| sobrenome | string | sobrenome da pessoa | true | false | body |\n| fone | object {  <br>codigo: string,  <br>celular: boolean,  <br>numero: string} | telefone de contato da pessoa, uma pessoa pode ter 0..1 fone | false | false | body |"
+			},
+			"response": []
+		},
+		{
+			"name": "atualizar",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 1,\r\n\t\"nome\": \"seja\",\r\n\t\"sobrenome\":\"eloii\",\r\n\t\"fone\": {\r\n\t\t\"codigo\": \"88\",\r\n\t\t\"celular\": false,\r\n\t\t\"numero\": \"899103449\"\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/update/contact/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"update",
+						"contact",
+						""
+					]
+				},
+				"description": "Rota para atualizar contato da pessoa\n\ncodigo de resposta de sucesso 204\n\n| param | type | Description | required | default | paths |\n| --- | --- | --- | --- | --- | --- |\n| nome | string | nome da pessoa | true | false | body |\n| sobrenome | string | sobrenome da pessoa | true | false | body |\n| fone | object {  <br>codigo: string,  <br>celular: boolean,  <br>numero: string} | telefone de contato da pessoa, uma pessoa pode ter 0..1 fone | false | false | body |"
+			},
+			"response": []
+		},
+		{
+			"name": "listar por filtro",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/list/name/contact/?nome=seja",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"list",
+						"name",
+						"contact",
+						""
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "seja"
+						}
+					]
+				},
+				"description": "Rota para listar contato por filtro \\[ filtro = nome \\]\n\ncodigo de resposta de sucesso 200"
+			},
+			"response": []
+		},
+		{
+			"name": "listar por id unico",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/list/contact/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"list",
+						"contact",
+						"1"
+					]
+				},
+				"description": "Lista uma pessoa por e seu fone por id\n\ncodigo de resposta de sucesso 200"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,12 +1,11 @@
-import { FoneEntity } from "./1-entities/fone"
-import { PessoaEntity } from "./1-entities/pessoa"
+import express from "express"
+import routes from "./routes"
+const app = express()
+const port = 3000
 
-const g = FoneEntity.create({
-    celular: true, codigo: 'd', numero: 'jk',
-})
-const d = PessoaEntity.create({
-    nome: 'k', sobrenome: 'j',
-    fone: g
-})
+app.use(express.json())
+app.use("/api", routes)
 
-console.log(d)
+app.listen(port, () => {
+  console.log(`Servidor Express está ouvindo na porta ${port}`)
+})
