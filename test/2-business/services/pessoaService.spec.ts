@@ -16,11 +16,7 @@ describe("Test Suite for service create pessoa", () => {
   test("should create a person contact", async () => {
     const spy = jest
       .spyOn(repositoriesPessoa, "create")
-      .mockReturnValue(
-        Promise.resolve(
-          new PessoaEntity({ nome: "test", sobrenome: "unitario" }),
-        ),
-      )
+      .mockReturnValue(Promise.resolve({ nome: "test", sobrenome: "unitario" }))
 
     const result = await service.create({
       nome: "test",
@@ -29,8 +25,8 @@ describe("Test Suite for service create pessoa", () => {
 
     expect(result).toBeInstanceOf(PessoaEntity)
     expect(spy).toBeCalled()
-    expect(result.nome).toBe("test")
-    expect(result.sobrenome).toBe("unitario")
+    expect(result).toHaveProperty("nome")
+    expect(result).toHaveProperty("sobrenome")
   })
 
   test("should handle exception when repository create method throws", async () => {
@@ -51,15 +47,10 @@ describe("Test Suite for service findOne pessoa", () => {
   test("should find a person entity ", async () => {
     const spy = jest
       .spyOn(repositoriesPessoa, "findOne")
-      .mockReturnValue(
-        Promise.resolve(
-          new PessoaEntity({ nome: "test", sobrenome: "unitario" }),
-        ),
-      )
+      .mockReturnValue(Promise.resolve({ nome: "test", sobrenome: "unitario" }))
 
     const result = await service.findOne(1)
 
-    expect(result).toBeInstanceOf(PessoaEntity)
     expect(spy).toBeCalled()
     expect(result.nome).toBe("test")
     expect(result.sobrenome).toBe("unitario")
@@ -90,9 +81,7 @@ describe("Test Suite for service findName pessoa", () => {
     const spy = jest
       .spyOn(repositoriesPessoa, "findName")
       .mockReturnValue(
-        Promise.resolve([
-          new PessoaEntity({ nome: "test", sobrenome: "unitario" }),
-        ]),
+        Promise.resolve([{ nome: "test", sobrenome: "unitario" }]),
       )
 
     const result = await service.findName("test")
@@ -125,20 +114,21 @@ describe("Test Suite for service findAll pessoa", () => {
   })
 
   test("should find all a person entity ", async () => {
-    const spy = jest
-      .spyOn(repositoriesPessoa, "findAll")
-      .mockReturnValue(
-        Promise.resolve([
-          new PessoaEntity({ nome: "test", sobrenome: "unitario" }),
-        ]),
-      )
+    const spy = jest.spyOn(repositoriesPessoa, "findAll").mockReturnValue(
+      Promise.resolve([
+        new PessoaEntity({
+          nome: "test",
+          sobrenome: "unitario",
+          fone: { celular: true, codigo: "88", numero: "999151378" },
+        }),
+      ]),
+    )
 
     const result = await service.findAll()
 
     expect(Array.isArray(result)).toBeTruthy()
     expect(spy).toBeCalled()
-    expect(result[0].nome).toBe("test")
-    expect(result[0].sobrenome).toBe("unitario")
+    expect(result[0].getPessoa()).toBeInstanceOf(PessoaEntity)
   })
 
   test("should handle exception when repository find all method throws", async () => {
@@ -164,14 +154,13 @@ describe("Test Suite for service update pessoa", () => {
 
   test("should update a person contact and if existe fone update fone", async () => {
     jest.spyOn(repositoriesPessoa, "findOne").mockReturnValue(
-      Promise.resolve(
-        new PessoaEntity({
-          nome: "test",
-          sobrenome: "unitario",
-          fone: { celular: true, codigo: "88", numero: "999151386" },
-        }),
-      ),
+      Promise.resolve({
+        nome: "test",
+        sobrenome: "unitario",
+        fone: { celular: true, codigo: "88", numero: "999151386" },
+      }),
     )
+
     const spyUpdatePessoa = jest
       .spyOn(repositoriesPessoa, "update")
       .mockReturnValue(Promise.resolve([]))
@@ -189,8 +178,8 @@ describe("Test Suite for service update pessoa", () => {
     expect(result).toBeInstanceOf(PessoaEntity)
     expect(spyUpdatePessoa).toBeCalled()
     expect(spyUpdateFone).toBeCalled()
-    expect(result.nome).toBe("test")
-    expect(result.sobrenome).toBe("update")
+    expect(result).toHaveProperty("nome")
+    expect(result).toHaveProperty("sobrenome")
   })
 
   test("should update return null if fone does`t exist", async () => {

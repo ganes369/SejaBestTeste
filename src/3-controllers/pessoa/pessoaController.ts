@@ -1,4 +1,4 @@
-import { IPessoaEntity } from "../../1-domain/pessoa"
+import { IPessoaEntity, PessoaEntity } from "../../1-domain/pessoa"
 import { IFoneRepository } from "../../2-business/repositories/foneRepository"
 import { IPessoaRepository } from "../../2-business/repositories/pessoaRepository"
 import { ServicePessoa } from "../../2-business/services/pessoa/pessoaService"
@@ -15,11 +15,11 @@ export class PessoaController {
     this.service = new ServicePessoa(this.repoPessoa, this.repoFone)
   }
 
-  async create(props: IPessoaEntity): Promise<IPessoaEntity> {
+  async create(props: IPessoaEntity): Promise<PessoaEntity> {
     return this.service.create(props)
   }
 
-  async listAll(): Promise<IPessoaEntity[]> {
+  async listAll(): Promise<PessoaEntity[]> {
     return this.service.findAll()
   }
 
@@ -29,7 +29,7 @@ export class PessoaController {
 
   async update(
     prop: Partial<IPessoaEntity> & { id: number },
-  ): Promise<Partial<IPessoaEntity>> {
+  ): Promise<Partial<PessoaEntity>> {
     return this.service.update(prop)
   }
 

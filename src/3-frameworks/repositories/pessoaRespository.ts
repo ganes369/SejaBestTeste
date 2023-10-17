@@ -13,14 +13,14 @@ export class PessoaRepository implements IPessoaRepository {
       },
     ]
   }
-  async create(props: IPessoaEntity): Promise<PessoaEntity> {
+  async create(props: IPessoaEntity): Promise<IPessoaEntity> {
     const associationInclude =
       props.fone !== undefined ? [{ association: "fone" }] : []
 
     const result = await PessoaModel.create(props, {
       include: associationInclude,
     })
-    return new PessoaEntity(result.get({ plain: true }))
+    return result.get({ plain: true })
   }
 
   async findOne(prop: number): Promise<IPessoaEntity> {
@@ -29,7 +29,7 @@ export class PessoaRepository implements IPessoaRepository {
       include: this.include,
       limit: 1,
     })
-    return result ? new PessoaEntity(result.get({ plain: true })) : undefined
+    return result ? result.get({ plain: true }) : undefined
   }
 
   async findName(prop: string): Promise<IPessoaEntity[]> {
@@ -38,10 +38,10 @@ export class PessoaRepository implements IPessoaRepository {
       include: this.include,
     })
 
-    return result.map((elem) => new PessoaEntity(elem.get({ plain: true })))
+    return result.map((elem) => elem.get({ plain: true }))
   }
 
-  async findAll(): Promise<IPessoaEntity[]> {
+  async findAll(): Promise<PessoaEntity[]> {
     const result = await PessoaModel.findAll({
       include: this.include,
     })

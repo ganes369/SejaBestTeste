@@ -1,13 +1,17 @@
-export interface IFoneEntity {
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+export type IFoneEntity = {
   codigo: string
   numero: string
   celular: boolean
 }
 
 export class FoneEntity {
-  codigo: string
-  numero: string
-  celular: boolean
+  // @ts-ignore
+  private codigo: string
+  // @ts-ignore
+  private numero: string
+  // @ts-ignore
+  private celular: boolean
 
   constructor(props: IFoneEntity) {
     this.codigo = props.codigo
@@ -15,7 +19,7 @@ export class FoneEntity {
     this.celular = props.celular
   }
 
-  setFone(props: IFoneEntity): IFoneEntity {
+  public setFone(props: IFoneEntity): this {
     if (props.codigo) {
       this.codigo = props.codigo
     }
@@ -29,7 +33,7 @@ export class FoneEntity {
     return this
   }
 
-  getFone(): IFoneEntity {
+  public getFone(): this {
     return this
   }
 }

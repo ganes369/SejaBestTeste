@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { FoneEntity, IFoneEntity } from "./fone"
 
 export interface IPessoaEntity {
@@ -7,9 +8,12 @@ export interface IPessoaEntity {
 }
 
 export class PessoaEntity {
-  nome: string
-  sobrenome: string
-  fone: IFoneEntity
+  // @ts-ignore
+  private nome: string
+  // @ts-ignore
+  private sobrenome: string
+  // @ts-ignore
+  private fone: FoneEntity
 
   constructor(props: IPessoaEntity) {
     this.nome = props.nome
@@ -25,13 +29,13 @@ export class PessoaEntity {
       this.sobrenome = props.sobrenome
     }
     if (props.fone) {
-      this.fone = props.fone
+      this.fone = new FoneEntity(props?.fone)
     }
 
     return this
   }
 
-  getPessoa(): IPessoaEntity {
+  public getPessoa(): this {
     return this
   }
 }

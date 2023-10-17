@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IPessoaEntity } from "../../../src/1-domain/pessoa"
+import { IPessoaEntity, PessoaEntity } from "../../../src/1-domain/pessoa"
 import { IPessoaRepository } from "../../../src/2-business/repositories/pessoaRepository"
 
 export class mockRepositoryPessoa implements IPessoaRepository {
@@ -12,7 +12,7 @@ export class mockRepositoryPessoa implements IPessoaRepository {
   findName(_prop: string): Promise<IPessoaEntity[]> {
     throw new Error("Method not implemented.")
   }
-  findAll(): Promise<IPessoaEntity[]> {
+  findAll(): Promise<PessoaEntity[]> {
     throw new Error("Method not implemented.")
   }
 

@@ -1,10 +1,11 @@
-import { FoneEntity, IFoneEntity } from "../../../1-domain/fone"
-import { IPessoaEntity, PessoaEntity } from "../../../1-domain/pessoa"
+import { IFoneEntity } from "../../../1-domain/fone"
+import { PessoaEntity } from "../../../1-domain/pessoa"
 import {
   IInputCreatePessoaDto,
   IInputFindOnePessoaDto,
   IInputUpdatePessoaDto,
   IOutputCreatePessoaDto,
+  IOutputFindAllDto,
   IOutputFindOnePessoaDto,
   IOutputUpdatePessoaDto,
 } from "../../dto/pessoa/create"
@@ -23,7 +24,8 @@ export class ServicePessoa {
     this.respositoryFone = respositoryFone
   }
   async create(props: IInputCreatePessoaDto): Promise<IOutputCreatePessoaDto> {
-    return this.repositoryPessoa.create(props)
+    const result = await this.repositoryPessoa.create(props)
+    return new PessoaEntity(result).getPessoa()
   }
 
   async findOne(
@@ -36,7 +38,7 @@ export class ServicePessoa {
     return this.repositoryPessoa.findName(prop)
   }
 
-  async findAll(): Promise<IPessoaEntity[]> {
+  async findAll(): Promise<IOutputFindAllDto> {
     return this.repositoryPessoa.findAll()
   }
 
@@ -52,16 +54,16 @@ export class ServicePessoa {
     if (find.fone) {
       const { celular, codigo, numero } = props.fone ?? {}
       this.respositoryFone.update({ pessoa: props.id, celular, codigo, numero })
-      fone = new FoneEntity({ celular, codigo, numero })
+      fone = { celular, codigo, numero }
     } else {
       const { celular, codigo, numero } = props.fone ?? {}
       this.respositoryFone.create({ celular, codigo, numero, pessoa: props.id })
-      fone = new FoneEntity({ celular, codigo, numero })
+      fone = { celular, codigo, numero }
     }
     const { id, nome, sobrenome } = props
 
     this.repositoryPessoa.update({ id, nome, sobrenome })
-
-    return pessoa.setPessoa({ nome, sobrenome, fone })
+    pessoa.setPessoa({ nome, sobrenome, fone })
+    return pessoa.getPessoa()
   }
 }

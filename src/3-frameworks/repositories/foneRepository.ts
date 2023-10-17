@@ -1,4 +1,4 @@
-import { FoneEntity, IFoneEntity } from "../../1-domain/fone"
+import { IFoneEntity } from "../../1-domain/fone"
 import { IFoneRepository } from "../../2-business/repositories/foneRepository"
 import { FoneModel } from "../models/foneModel"
 
@@ -19,6 +19,6 @@ export class FoneRepository implements IFoneRepository {
     props: Partial<IFoneEntity> & { pessoa: number },
   ): Promise<IFoneEntity> {
     const result = await FoneModel.create(props)
-    return new FoneEntity(result.get({ plain: true }))
+    return result.get({ plain: true })
   }
 }
